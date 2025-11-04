@@ -3,9 +3,9 @@ import numpy as np
 from PIL import Image
 import tempfile
 import os
-import time
-import io
-import base64
+import av
+
+
 
 # Try to import OpenCV with specific version
 try:
@@ -14,6 +14,12 @@ try:
 except ImportError as e:
     OPENCV_AVAILABLE = False
     st.sidebar.warning("⚠️ OpenCV not available - video features disabled")
+
+try:
+    from streamlit_webrtc import webrtc_streamer, WebRtcMode, VideoProcessorBase
+    WEBRTC_AVAILABLE = True
+except ImportError:
+    WEBRTC_AVAILABLE = False
 
 # Set page configuration
 st.set_page_config(
